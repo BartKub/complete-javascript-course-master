@@ -83,6 +83,16 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumIn.textContent = `${incomes} Euro`;
+};
+
+console.log(calcDisplaySummary(account1.movements));
+
 const createUserNames = function (accs) {
   accs.forEach(acc => {
     acc.username = acc.owner
