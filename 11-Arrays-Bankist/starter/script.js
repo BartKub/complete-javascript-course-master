@@ -207,12 +207,31 @@ btnSort.addEventListener('click', function (e) {
   sorted = !sorted;
 });
 /////////////////////////////////////////////////
-const arrr = ['JOnas', 'Zack', 'Adam', 'Martha'];
 
-// >0 switch order
-// <0 keep order
+const bankdepositsum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(dep => dep > 0)
+  .reduce((acc, curr) => acc + curr, 0);
 
-account1.movements.sort((a, b) => {
-  if (a > b) return 1;
-  if (b > a) return -1;
-});
+const depositsWith1000AtLeast = accounts
+  .flatMap(acc => acc.movements)
+  .filter(dep => dep >= 1000).length;
+
+console.log(depositsWith1000AtLeast);
+
+const convertTitleCase = function (title) {
+  const exceptions = ['a', 'an', 'the'];
+
+  const titlecase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => {
+      if (!exceptions.includes(word)) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      }
+      return word;
+    });
+  return titlecase;
+};
+
+console.log(convertTitleCase('this is a test'));
